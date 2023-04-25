@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/vadim-mg/virtual-keyboard/issues"
   },
-  "homepage": "https://github.com/vadim-mg/virtual-keyboard#readme"
+  "homepage": "https://github.com/vadim-mg/virtual-keyboard#readme",
+  "devDependencies": {
+    "webpack": "^5.80.0",
+    "webpack-cli": "^5.0.2"
+  }
 }
