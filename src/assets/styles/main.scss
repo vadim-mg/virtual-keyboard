@@ -1,3 +1,40 @@
 body {
-  background: yellow;
+  // background: yellow;
+}
+
+.keyboard {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 2rem 1rem;
+  border: 2px solid #5c5c5c;
+  background: #5c5c5c;
+  border-radius: 10px;
+}
+.keyboard__row {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+.keybord__key {
+  background: gray;
+  color: white;
+  border-radius: 4px;
+  padding: 1rem;
+  font-size: 1rem;
+  min-width: 1rem;
+  text-align: center;
+  font-family: sans-serif;
+  &:hover{
+    opacity: 0.7;
+    cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  &_pressed {
+    background: greenyellow;
+  }
 }
