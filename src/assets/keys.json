@@ -1,0 +1,269 @@
+[
+  {
+    "Backquote": {
+      "key": "`",
+      "withShiftKey": "~"
+    },
+    "Digit1": {
+      "key": "1",
+      "withShiftKey": "!"
+    },
+    "Digit2": {
+      "key": "2",
+      "withShiftKey": "@"
+    },
+    "Digit3": {
+      "key": "3",
+      "withShiftKey": "#"
+    },
+    "Digit4": {
+      "key": "4",
+      "withShiftKey": "$"
+    },
+    "Digit5": {
+      "key": "5",
+      "withShiftKey": "%"
+    },
+    "Digit6": {
+      "key": "6",
+      "withShiftKey": "^"
+    },
+    "Digit7": {
+      "key": "7",
+      "withShiftKey": "&"
+    },
+    "Digit8": {
+      "key": "8",
+      "withShiftKey": "*"
+    },
+    "Digit9": {
+      "key": "9",
+      "withShiftKey": "("
+    },
+    "Digit0": {
+      "key": "0",
+      "withShiftKey": ")"
+    },
+    "Minus": {
+      "key": "-",
+      "withShiftKey": "_"
+    },
+    "Equal": {
+      "key": "=",
+      "withShiftKey": "+"
+    },
+    "Backspace": {
+      "key": "Backspace",
+      "width": "6.1rem"
+    }
+  },
+  {
+    "Tab": {
+      "key": "Tab",
+      "width": "2rem"
+    },
+    "KeyQ": {
+      "key": "q",
+      "withShiftKey": "Q"
+    },
+    "KeyW": {
+      "key": "w",
+      "withShiftKey": "W"
+    },
+    "KeyE": {
+      "key": "e",
+      "withShiftKey": "E"
+    },
+    "KeyR": {
+      "key": "r",
+      "withShiftKey": "R"
+    },
+    "KeyT": {
+      "key": "t",
+      "withShiftKey": "T"
+    },
+    "KeyY": {
+      "key": "y",
+      "withShiftKey": "Y"
+    },
+    "KeyU": {
+      "key": "u",
+      "withShiftKey": "U"
+    },
+    "KeyI": {
+      "key": "i",
+      "withShiftKey": "I"
+    },
+    "KeyO": {
+      "key": "o",
+      "withShiftKey": "O"
+    },
+    "KeyP": {
+      "key": "p",
+      "withShiftKey": "P"
+    },
+    "BracketLeft": {
+      "key": "[",
+      "withShiftKey": "{"
+    },
+    "BracketRight": {
+      "key": "]",
+      "withShiftKey": "}"
+    },
+    "Backslash": {
+      "key": "\\",
+      "withShiftKey": "|"
+    },
+    "Delete": {
+      "key": "Delete",
+      "name": "Del"
+    }
+  },
+  {
+    "CapsLock": {
+      "key": "CapsLock",
+      "width": "5.4rem"
+    },
+    "KeyA": {
+      "key": "a",
+      "withShiftKey": "A"
+    },
+    "KeyS": {
+      "key": "s",
+      "withShiftKey": "S"
+    },
+    "KeyD": {
+      "key": "d",
+      "withShiftKey": "D"
+    },
+    "KeyF": {
+      "key": "f",
+      "withShiftKey": "F"
+    },
+    "KeyG": {
+      "key": "g",
+      "withShiftKey": "G"
+    },
+    "KeyH": {
+      "key": "h",
+      "withShiftKey": "H"
+    },
+    "KeyJ": {
+      "key": "j",
+      "withShiftKey": "J"
+    },
+    "KeyK": {
+      "key": "k",
+      "withShiftKey": "K"
+    },
+    "KeyL": {
+      "key": "l",
+      "withShiftKey": "L"
+    },
+    "Semicolon": {
+      "key": ";",
+      "withShiftKey": ":"
+    },
+    "Quote": {
+      "key": "'",
+      "withShiftKey": "\""
+    },
+    "Enter": {
+      "key": "Enter",
+      "width": "5.4rem"
+    }
+  },
+  {
+    "ShiftLeft": {
+      "key": "Shift",
+      "width": "5.4rem"
+    },
+    "KeyZ": {
+      "key": "z",
+      "withShiftKey": "Z"
+    },
+    "KeyX": {
+      "key": "x",
+      "withShiftKey": "X"
+    },
+    "KeyC": {
+      "key": "c",
+      "withShiftKey": "C"
+    },
+    "KeyV": {
+      "key": "v",
+      "withShiftKey": "V"
+    },
+    "KeyB": {
+      "key": "b",
+      "withShiftKey": "B"
+    },
+    "KeyN": {
+      "key": "n",
+      "withShiftKey": "N"
+    },
+    "KeyM": {
+      "key": "m",
+      "withShiftKey": "M"
+    },
+    "Comma": {
+      "key": ",",
+      "withShiftKey": "<"
+    },
+    "Period": {
+      "key": ".",
+      "withShiftKey": ">"
+    },
+    "Slash": {
+      "key": "/",
+      "withShiftKey": "?"
+    },
+    "ArrowUp": {
+      "key": "ArrowUp",
+      "name": "▲"
+    },
+    "ShiftRight": {
+      "key": "Shift",
+      "width": "5.4rem"
+    }
+  },
+  {
+    "ControlLeft": {
+      "key": "Control",
+      "name": "Ctrl"
+    },
+    "MetaLeft": {
+      "key": "Meta",
+      "name": "Win"
+    },
+    "AltLeft": {
+      "key": "Alt"
+    },
+    "Space": {
+      "key": " ",
+      "width": "22rem"
+    },
+    "AltRight": {
+      "key": "AltGraph",
+      "name": "Alt"
+    },
+
+    "ArrowLeft": {
+      "key": "ArrowLeft",
+      "name": "◄"
+    },
+
+    "ArrowDown": {
+      "key": "ArrowDown",
+      "name": "▼"
+    },
+    "ArrowRight": {
+      "key": "ArrowRight",
+      "name": "►"
+    },
+    "ControlRight": {
+      "key": "Control",
+      "name": "Ctrl"
+    }
+  }
+]

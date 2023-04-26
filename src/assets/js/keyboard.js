@@ -1,37 +1,24 @@
-const keys = [
-  [
-    {
-      key: "q",
-      code: "KeyQ",
-    },
-    {
-      key: "r",
-      code: "KeyR",
-    },
-  ],
-  [
-    {
-      key: "A",
-      code: "KeyA",
-    },
-    {
-      key: "c",
-      code: "KeyC",
-    },
-  ],
-]
+import { Key } from "./key"
 
-export const keyboard = document.createElement("div")
-keyboard.className = "keyboard"
+export class Keyboard {
+  board
 
-keys.forEach((row) => {
-  const line = document.createElement("ul")
-  line.className = "keyboard__row"
-  keyboard.append(line)
-  row.forEach((key) => {
-    const button = document.createElement("li")
-    button.className = "keyboard__key"
-    button.textContent = key.key
-    line.append(button)
-  })
-})
+  constructor(keys) {
+    // console.log(keys)
+    this.board = document.createElement("div")
+    this.board.className = "keyboard"
+
+    keys.forEach((row) => {
+      const line = document.createElement("ul")
+      line.className = "keyboard__row"
+      this.board.append(line)
+      // console.log(row)
+
+      for (let code in row) {
+        const button = new Key(code, row[code])
+        line.append(button)
+      }
+    })
+  }
+}
+
