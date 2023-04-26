@@ -1,4 +1,8 @@
 body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
 }
 
 .caption {
@@ -18,6 +22,7 @@ body {
   border: 2px solid #5c5c5c;
   background: #5c5c5c;
   border-radius: 10px;
+  box-shadow: 3px 3px 5px 6px gray;
 }
 
 .keyboard__row {
@@ -30,6 +35,8 @@ body {
 }
 
 .keyboard__key {
+  user-select: none;
+  box-shadow: 0px 1px 3px 2px white;
   background: gray;
   color: white;
   border-radius: 4px;
@@ -38,13 +45,16 @@ body {
   min-width: 1rem;
   text-align: center;
   font-family: sans-serif;
+  transition:  0.1s;
   &:hover {
-    opacity: 0.7;
     cursor: pointer;
-    transition: opacity 0.2s;
+    color: rgb(109, 252, 73);
   }
   &_pressed {
-    background: greenyellow;
+    opacity: 0.7;
+    background: gray;
+    box-shadow: 0px 1px 1px 1px;
+    color: rgb(109, 252, 73);
   }
   &_system {
     background: #6f6f6f;
