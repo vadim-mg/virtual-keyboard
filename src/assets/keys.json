@@ -54,13 +54,13 @@
     },
     "Backspace": {
       "key": "Backspace",
-      "width": "6.1rem"
+      "width": "8.6rem"
     }
   },
   {
     "Tab": {
       "key": "Tab",
-      "width": "2rem"
+      "width": "4rem"
     },
     "KeyQ": {
       "key": "q",
@@ -116,13 +116,14 @@
     },
     "Delete": {
       "key": "Delete",
-      "name": "Del"
+      "name": "Del",
+      "width": "4rem"
     }
   },
   {
     "CapsLock": {
       "key": "CapsLock",
-      "width": "4rem"
+      "width": "6rem"
     },
     "KeyA": {
       "key": "a",
@@ -170,13 +171,13 @@
     },
     "Enter": {
       "key": "Enter",
-      "width": "6.8rem"
+      "width": "9rem"
     }
   },
   {
     "ShiftLeft": {
       "key": "Shift",
-      "width": "5.4rem"
+      "width": "8rem"
     },
     "KeyZ": {
       "key": "z",
@@ -224,7 +225,7 @@
     },
     "ShiftRight": {
       "key": "Shift",
-      "width": "5.4rem"
+      "width": "7rem"
     }
   },
   {
@@ -241,7 +242,7 @@
     },
     "Space": {
       "key": " ",
-      "width": "22rem"
+      "width": "26.2rem"
     },
     "AltRight": {
       "key": "AltGraph",
@@ -263,7 +264,8 @@
     },
     "ControlRight": {
       "key": "Control",
-      "name": "Ctrl"
+      "name": "Ctrl",
+      "width": "3rem"
     }
   }
 ]

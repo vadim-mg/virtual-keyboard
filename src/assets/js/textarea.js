@@ -8,22 +8,23 @@ const keysArray = []
 
 
 textarea.addEventListener("keydown", (event) => {
-  if (event.repeat) return
-  // console.log(event.code)
-  // console.log(event)
-  
-  if (!rowKeys[event.code]) {
-    rowKeys[event.code] = {}
-    number++
-  }
-
-  if (event.shiftKey) {
-    rowKeys[event.code].withShiftKey = event.key
-  } else {
-    rowKeys[event.code].key = event.key
-  }
-
-  console.log(JSON.stringify(rowKeys))
 })
+
+/* YOu can click all phisical keyboard and then copy json from console */
+// textarea.addEventListener("keydown", (event) => {
+//   if (event.repeat) return
+  
+//   if (!rowKeys[event.code]) {
+//     rowKeys[event.code] = {}
+//     number++
+//   }
+
+//   if (event.shiftKey) {
+//     rowKeys[event.code].withShiftKey = event.key
+//   } else {
+//     rowKeys[event.code].key = event.key
+//   }
+//   console.log(JSON.stringify(rowKeys))
+// })
 
 

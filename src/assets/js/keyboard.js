@@ -49,7 +49,7 @@ export class Keyboard {
       supportEventTypes.includes(event.type)
     ) {
       this._handleVirtualKeyboardEvent(
-        event.type,
+        event,
         "mousedown",
         event.target.dataset.code,
         event.target,
@@ -67,7 +67,7 @@ export class Keyboard {
       supportEventTypes.includes(event.type)
     ) {
       this._handleVirtualKeyboardEvent(
-        event.type,
+        event,
         "keydown",
         event.code,
         this._keys[event.code].getElement(),
@@ -78,20 +78,20 @@ export class Keyboard {
 
   /**
    *
-   * @param {string} eventType - type of event
+   * @param {Event} event 
    * @param {string} eventTypeDown - for mouseEvent "mousedown", for keyboard "keydown"
    * @param {*} code  - key kode from event
    * @param {*} eventTarget - dom element of keys for changing styles
    * @param {*} eventKey - key from event
    */
   _handleVirtualKeyboardEvent = (
-    eventType,
+    event,
     eventTypeDown,
     code,
     eventTarget,
     eventKey
   ) => {
-    const pressedDown = eventType === eventTypeDown
+    const pressedDown = event.type === eventTypeDown
     const pressedKeyClass = "keyboard__key_pressed"
 
     if (pressedDown) {
