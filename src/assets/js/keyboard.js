@@ -9,7 +9,7 @@ export class Keyboard {
 
   constructor(keys, alternativeKeys) {
     this._pressedKeys = new Set()
-    this._enLocale = true
+    this._enLocale = localStorage.getItem("locale") === "en" ? true : false
     this._keys = {}
     this._alternativeKeys = alternativeKeys
     this._board = document.createElement("div")
@@ -31,8 +31,7 @@ export class Keyboard {
       }
     })
 
-
-
+    if (!this._enLocale) this._setLocale()
 
     this._board.addEventListener("mousedown", this.handleMouseEvent)
     this._board.addEventListener("mouseout", this.handleMouseEvent)
@@ -44,7 +43,7 @@ export class Keyboard {
 
   handleMouseEvent = (event) => {
     const supportEventTypes = ["mousedown", "mouseup", "mouseout"]
-    
+
     if (
       event.target.classList.contains("keyboard__key") &&
       supportEventTypes.includes(event.type)
@@ -78,7 +77,7 @@ export class Keyboard {
   }
 
   /**
-   * 
+   *
    * @param {string} eventType - type of event
    * @param {string} eventTypeDown - for mouseEvent "mousedown", for keyboard "keydown"
    * @param {*} code  - key kode from event
@@ -114,10 +113,15 @@ export class Keyboard {
     if (this._pressedKeys.size === 2) {
       if (this._pressedKeys.has("AltLeft") && this._pressedKeys.has("ControlLeft")) {
         this._enLocale = !this._enLocale
-        for (let key in this._alternativeKeys) {
-          this._alternativeKeys[key].button.setLocale(this._enLocale)
-        }
+        this._setLocale()
+        localStorage.setItem("locale", this._enLocale ? "en" : " ru")
       }
+    }
+  }
+
+  _setLocale = () => {
+    for (let key in this._alternativeKeys) {
+      this._alternativeKeys[key].button.setLocale(this._enLocale)
     }
   }
 
