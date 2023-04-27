@@ -13,7 +13,8 @@ export class Textarea {
     this._textField.cols = cols
     this._textField.rows = rows
     this._textField.autofocus = true
-    this._textField.value = "0123456789012345678901234567890123456789012345678901234567890123456789"
+    this._textField.value =
+      "0123456789012345678901234567890123456789012345678901234567890123456789"
 
     this._wrapper.append(this._textField)
 
@@ -53,6 +54,12 @@ export class Textarea {
           startPos--
         }
         break
+      case "Delete":
+        insertingText = ""
+        if (startPos === endPos && startPos < this._textField.value.length) {
+          endPos++
+        }
+        break
       case "ArrowLeft":
         insertingText = ""
         if (startPos > 0) {
@@ -70,19 +77,22 @@ export class Textarea {
       case "ArrowUp":
         insertingText = ""
         currentRow = Math.ceil(startPos / this._textField.cols)
-        if (currentRow > 0 ) {
+        if (currentRow > 0) {
           startPos = startPos - this._textField.cols
-          if(startPos < 0)startPos = 0
+          if (startPos < 0) startPos = 0
           endPos = startPos
         }
         break
       case "ArrowDown":
         insertingText = ""
         currentRow = Math.ceil(startPos / this._textField.cols)
-        if (currentRow < Math.ceil(this._textField.value.length / this._textField.cols) ) {
+        if (currentRow < Math.ceil(this._textField.value.length / this._textField.cols)) {
           startPos = startPos + this._textField.cols
           endPos = startPos
         }
+        break
+      case "Enter":
+        insertingText = "\n"
         break
       case "Shift":
         break
