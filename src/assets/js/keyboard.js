@@ -6,14 +6,18 @@ export class Keyboard {
   _alternativeKeys
   _enLocale
   _pressedKeys
+  _capslockIsOn
+  _textarea
 
-  constructor(keys, alternativeKeys) {
+  constructor(keys, alternativeKeys, textarea) {
     this._pressedKeys = new Set()
     this._enLocale = localStorage.getItem("locale") === "en" ? true : false
     this._keys = {}
     this._alternativeKeys = alternativeKeys
     this._board = document.createElement("div")
     this._board.className = "keyboard"
+    this.capslockIsOn = false
+    this._textarea = textarea
 
     keys.forEach((row) => {
       const line = document.createElement("ul")
@@ -30,7 +34,7 @@ export class Keyboard {
         line.append(button.getElement())
       }
     })
-
+    console.log(this._keys) 
     if (!this._enLocale) this._setLocale()
 
     this._board.addEventListener("mousedown", this.handleMouseEvent)
@@ -42,20 +46,22 @@ export class Keyboard {
   }
 
   handleMouseEvent = (event) => {
-    const supportEventTypes = ["mousedown", "mouseup", "mouseout"]
-
+    const supportEventTypesUnpressed = ["mousedown"]
+    const supportEventTypesPressed = ["mouseup", "mouseout"]
     if (
-      event.target.classList.contains("keyboard__key") &&
-      supportEventTypes.includes(event.type)
+      (event.target.classList.contains("keyboard__key") &&
+        supportEventTypesUnpressed.includes(event.type)) ||
+      (event.target.classList.contains("keyboard__key_pressed") &&
+        supportEventTypesPressed.includes(event.type))
     ) {
       this._handleVirtualKeyboardEvent(
         event,
         "mousedown",
         event.target.dataset.code,
-        event.target,
-        event.target.dataset.key
+        event.target
       )
     }
+    event.preventDefault()
   }
 
   handleKeyboardEvent = (event) => {
@@ -70,33 +76,37 @@ export class Keyboard {
         event,
         "keydown",
         event.code,
-        this._keys[event.code].getElement(),
-        event.key
+        this._keys[event.code].getElement()
       )
     }
   }
 
   /**
    *
-   * @param {Event} event 
+   * @param {Event} event
    * @param {string} eventTypeDown - for mouseEvent "mousedown", for keyboard "keydown"
    * @param {*} code  - key kode from event
    * @param {*} eventTarget - dom element of keys for changing styles
-   * @param {*} eventKey - key from event
    */
-  _handleVirtualKeyboardEvent = (
-    event,
-    eventTypeDown,
-    code,
-    eventTarget,
-    eventKey
-  ) => {
+  _handleVirtualKeyboardEvent = (event, eventTypeDown, code, eventTarget) => {
     const pressedDown = event.type === eventTypeDown
     const pressedKeyClass = "keyboard__key_pressed"
+    const eventKey = this._keys[code].getProperties().key
 
     if (pressedDown) {
       this._pressedKeys.add(code)
       eventTarget.classList.add(pressedKeyClass)
+
+      const virtualKeydownEvent = new KeyboardEvent("virtualKeydown", {
+        key: eventKey,
+        code: code,
+        bubbles: true,
+        // "composed": true,
+        // "cancelable": true
+      })
+      virtualKeydownEvent.specDetails = this._keys[code].getProperties()
+
+      this._textarea.dispatchEvent(virtualKeydownEvent)
     } else {
       this._pressedKeys.delete(code)
       eventTarget.classList.remove(pressedKeyClass)

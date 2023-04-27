@@ -1,6 +1,6 @@
 import "./assets/styles/main.scss"
 import { caption } from "./assets/js/caption"
-import { textarea } from "./assets/js/textarea"
+import { Textarea } from "./assets/js/textarea"
 import { Keyboard } from "./assets/js/keyboard"
 import keys from "./assets/keys.json"
 import keysRu from "./assets/keys-ru.json"
@@ -8,8 +8,9 @@ import keysRu from "./assets/keys-ru.json"
 const body = document.querySelector("body")
 
 body.append(caption)
+const textarea = new Textarea(100, 10, 'text-field')
 body.append(textarea)
-const keyboard = new Keyboard(keys, keysRu)
+const keyboard = new Keyboard(keys, keysRu, textarea)
 body.append(keyboard.board())
 
 const text = document.createElement("p")
