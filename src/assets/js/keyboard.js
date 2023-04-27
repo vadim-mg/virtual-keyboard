@@ -37,41 +37,51 @@ export class Keyboard {
     console.log(this._keys)
     if (!this._enLocale) this._setLocale()
 
-    this._board.addEventListener("mousedown", this.handleMouseEvent)
-    this._board.addEventListener("mouseout", this.handleMouseEvent)
-    this._board.addEventListener("mouseup", this.handleMouseEvent)
+    this._board.addEventListener("mousedown", this._handleMouseEvent)
+    this._board.addEventListener("mouseout", this._handleMouseEvent)
+    this._board.addEventListener("mouseup", this._handleMouseEvent)
 
     const html = document.querySelector("body")
-    html.addEventListener("keydown", this.handleKeyboardEvent)
-    html.addEventListener("keyup", this.handleKeyboardEvent)
+    html.addEventListener("keydown", this._handleKeyboardEvent)
+    html.addEventListener("keyup", this._handleKeyboardEvent)
   }
 
-  handleMouseEvent = (event) => {
-    const supportEventTypesUnpressed = ["mousedown"]
-    const supportEventTypesPressed = ["mouseup", "mouseout"]
+  _handleMouseEvent = (event) => {
+    const supportEventTypesUnpressed = ["mousedown"].includes(event.type)
+    const supportEventTypesPressed = ["mouseup", "mouseout"].includes(event.type)
+    const unpressedKey = () => event.target.classList.contains("keyboard__key")
+    const pressedKey = () => event.target.classList.contains("keyboard__key_pressed")
     if (
-      (event.target.classList.contains("keyboard__key") &&
-        supportEventTypesUnpressed.includes(event.type)) ||
-      (event.target.classList.contains("keyboard__key_pressed") &&
-        supportEventTypesPressed.includes(event.type))
+      (unpressedKey() && supportEventTypesUnpressed) ||
+      (pressedKey() && supportEventTypesPressed)
     ) {
-      this._handleVirtualKeyboardEvent(
-        event,
-        "mousedown",
-        event.target.dataset.code,
-        event.target
-      )
+      const handleKeyboardEvent = () =>
+        this._handleVirtualKeyboardEvent(
+          event,
+          "mousedown",
+          event.target.dataset.code,
+          event.target
+        )
+      handleKeyboardEvent()
+      setTimeout(() => {
+        if (pressedKey()) {
+          const repeater = setInterval(() => {
+            if (pressedKey()) {
+              handleKeyboardEvent()
+            } else {
+              clearInterval(repeater)
+            }
+          }, 50)
+        }
+      }, 300)
       event.preventDefault()
     }
   }
 
-  handleKeyboardEvent = (event) => {
+  _handleKeyboardEvent = (event) => {
     const supportEventTypes = ["keydown", "keyup"]
 
-    if (
-      this._keys[event.code] &&
-      supportEventTypes.includes(event.type)
-    ) {
+    if (this._keys[event.code] && supportEventTypes.includes(event.type)) {
       this._handleVirtualKeyboardEvent(
         event,
         "keydown",
