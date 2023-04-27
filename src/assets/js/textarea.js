@@ -16,7 +16,6 @@ export class Textarea {
 
     this._wrapper.append(this._textField)
 
-    this._wrapper.addEventListener("keydown", (event) => event.preventDefault())
     this._wrapper.addEventListener("virtualKeydown", this._handlerKeydown)
     this._wrapper.addEventListener("focusout", this.focus)
 
@@ -28,7 +27,6 @@ export class Textarea {
   }
 
   _handlerKeydown = (event) => {
-    if (event.isTrusted) event.preventDefault()
 
     const keyProps = event.specDetails
 

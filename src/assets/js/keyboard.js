@@ -34,15 +34,16 @@ export class Keyboard {
         line.append(button.getElement())
       }
     })
-    console.log(this._keys) 
+    console.log(this._keys)
     if (!this._enLocale) this._setLocale()
 
     this._board.addEventListener("mousedown", this.handleMouseEvent)
     this._board.addEventListener("mouseout", this.handleMouseEvent)
     this._board.addEventListener("mouseup", this.handleMouseEvent)
 
-    window.addEventListener("keydown", this.handleKeyboardEvent)
-    window.addEventListener("keyup", this.handleKeyboardEvent)
+    const html = document.querySelector("body")
+    html.addEventListener("keydown", this.handleKeyboardEvent)
+    html.addEventListener("keyup", this.handleKeyboardEvent)
   }
 
   handleMouseEvent = (event) => {
@@ -60,15 +61,14 @@ export class Keyboard {
         event.target.dataset.code,
         event.target
       )
+      event.preventDefault()
     }
-    event.preventDefault()
   }
 
   handleKeyboardEvent = (event) => {
     const supportEventTypes = ["keydown", "keyup"]
 
     if (
-      !event.repeat &&
       this._keys[event.code] &&
       supportEventTypes.includes(event.type)
     ) {
@@ -78,6 +78,7 @@ export class Keyboard {
         event.code,
         this._keys[event.code].getElement()
       )
+      event.preventDefault()
     }
   }
 
