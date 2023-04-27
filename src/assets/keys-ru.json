@@ -51,9 +51,6 @@
     "key": "=",
     "withShiftKey": "+"
   },
-  "ShiftRight": {
-    "withShiftKey": "Shift"
-  },
   "KeyQ": {
     "key": "й",
     "withShiftKey": "Й"
