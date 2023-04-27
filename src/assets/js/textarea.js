@@ -13,6 +13,7 @@ export class Textarea {
     this._textField.cols = cols
     this._textField.rows = rows
     this._textField.autofocus = true
+    this._textField.value = "0123456789012345678901234567890123456789012345678901234567890123456789"
 
     this._wrapper.append(this._textField)
 
@@ -27,7 +28,6 @@ export class Textarea {
   }
 
   _handlerKeydown = (event) => {
-
     const keyProps = event.specDetails
 
     console.log("-----------------------------------------------")
@@ -44,29 +44,64 @@ export class Textarea {
       endPos: ${endPos}
       `
 
-    switch (keyProps.code){
-      case 'Backspace':
-        insertingText = ''
-        if(startPos === endPos && startPos > 0){
+    let currentRow
+
+    switch (keyProps.code) {
+      case "Backspace":
+        insertingText = ""
+        if (startPos === endPos && startPos > 0) {
           startPos--
         }
-      break;
-      case 'Shift':
-
-      break;
+        break
+      case "ArrowLeft":
+        insertingText = ""
+        if (startPos > 0) {
+          startPos--
+          endPos = startPos
+        }
+        break
+      case "ArrowRight":
+        insertingText = ""
+        if (startPos < this._textField.value.length) {
+          startPos++
+          endPos = startPos
+        }
+        break
+      case "ArrowUp":
+        insertingText = ""
+        currentRow = Math.ceil(startPos / this._textField.cols)
+        if (currentRow > 0 ) {
+          startPos = startPos - this._textField.cols
+          if(startPos < 0)startPos = 0
+          endPos = startPos
+        }
+        break
+      case "ArrowDown":
+        insertingText = ""
+        currentRow = Math.ceil(startPos / this._textField.cols)
+        if (currentRow < Math.ceil(this._textField.value.length / this._textField.cols) ) {
+          startPos = startPos + this._textField.cols
+          endPos = startPos
+        }
+        break
+      case "Shift":
+        break
       default:
-
     }
+
     this._textField.value =
       this._textField.value.substring(0, startPos) +
       insertingText +
       this._textField.value.substring(endPos, this._textField.value.length)
+
     this._textField.selectionStart = this._textField.selectionEnd =
       startPos + insertingText.length
 
     this._info.textContent += ` |||||   
       selectionStart: ${this._textField.selectionStart}
       selectionEnd: ${this._textField.selectionEnd}
+      cols: ${this._textField.cols}
+      rows: ${this._textField.rows}
       `
   }
 }
