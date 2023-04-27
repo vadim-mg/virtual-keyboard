@@ -34,16 +34,29 @@ export class Textarea {
     console.log(keyProps)
     console.dir(event.target)
 
-    const insertingText = !keyProps.system ? keyProps.key : ""
+    let insertingText = !keyProps.system ? keyProps.key : ""
 
     this.focus()
-    const startPos = this._textField.selectionStart
-    const endPos = this._textField.selectionEnd
+    let startPos = this._textField.selectionStart
+    let endPos = this._textField.selectionEnd
     this._info.textContent = `
       startPos: ${startPos}
       endPos: ${endPos}
       `
 
+    switch (keyProps.code){
+      case 'Backspace':
+        insertingText = ''
+        if(startPos === endPos && startPos > 0){
+          startPos--
+        }
+      break;
+      case 'Shift':
+
+      break;
+      default:
+
+    }
     this._textField.value =
       this._textField.value.substring(0, startPos) +
       insertingText +
