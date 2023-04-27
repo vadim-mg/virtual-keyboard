@@ -94,6 +94,9 @@ export class Textarea {
       case "Enter":
         insertingText = "\n"
         break
+      case "Tab":
+        insertingText = "\t"
+        break
       case "Shift":
         break
       default:
