@@ -14,7 +14,7 @@ export class Key {
     this._button.className = "keyboard__key"
 
     this._button.dataset.code = code
-    if (props.withShiftKey && props.withShiftKey !== props.key || code === 'Space') {
+    if ((props.withShiftKey && props.withShiftKey !== props.key) || code === "Space") {
       this._system = false
     } else {
       this._button.classList.add("keyboard__key_system")
@@ -28,7 +28,11 @@ export class Key {
     }
   }
 
-  pressShift = (pressed = true) => {
+  /**
+   *
+   * @param {boolean} pressed
+   */
+  shift = (pressed = true) => {
     if (this._props.withShiftKey) {
       this.render(pressed)
     }
@@ -42,8 +46,8 @@ export class Key {
   }
 
   render = (shiftPressed = false) => {
-    const locateDependence = this._enLocale ? '_props' : '_alternativeProps'
-    const shiftDependence = shiftPressed ? 'withShiftKey' : 'key'
+    const locateDependence = this._enLocale ? "_props" : "_alternativeProps"
+    const shiftDependence = shiftPressed ? "withShiftKey" : "key"
     this._button.textContent = this[locateDependence][shiftDependence]
   }
 
@@ -57,12 +61,12 @@ export class Key {
 
   getWithShiftKey = () => this._props.withShiftKey
 
-  getProperties = () => ({
+  getProperties = (isEnLocale = true) => ({
     code: this._code,
     system: this._system,
-    key: this._props.key,
-    withShiftKey: this._props.withShiftKey,
-    alternativeKey: this._alternativeProps?.key,
-    alternativeWithShiftKey:  this._alternativeProps?.withShiftKey,
+    key: isEnLocale ? this._props.key : this._alternativeProps?.key ?? this._props.key,
+    withShiftKey: isEnLocale
+      ? this._props.withShiftKey
+      : this._alternativeProps?.withShiftKey ?? this._props.withShiftKey,
   })
 }

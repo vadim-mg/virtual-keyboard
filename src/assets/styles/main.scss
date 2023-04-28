@@ -46,7 +46,7 @@ body {
   // min-width: 1rem;
   text-align: center;
   font-family: sans-serif;
-  transition:  0.1s;
+  transition: 0.1s;
 
   display: flex;
   box-sizing: border-box;
@@ -56,13 +56,16 @@ body {
   align-items: center;
   &:hover {
     cursor: pointer;
-    color: rgb(109, 252, 73);
+    color: rgb(207, 238, 31);
   }
   &_pressed {
     opacity: 0.7;
     background: gray;
     box-shadow: 0px 1px 1px 1px;
     color: rgb(109, 252, 73);
+    &:hover {
+      color: rgb(109, 252, 73);
+    }
   }
   &_system {
     background: #6f6f6f;

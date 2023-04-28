@@ -33,9 +33,17 @@ export class Textarea {
 
     console.log("-----------------------------------------------")
     console.log(keyProps)
+    console.dir(event)
     console.dir(event.target)
 
-    let insertingText = !keyProps.system ? keyProps.key : ""
+    const printedChar =
+      !keyProps.system && keyProps.shiftPressed && keyProps.withShiftKey
+        ? keyProps.withShiftKey
+        : keyProps.key
+
+    let insertingText = !keyProps.system ? printedChar : ""
+
+    console.log(`insertingText: ${insertingText}`)
 
     this.focus()
     let startPos = this._textField.selectionStart
