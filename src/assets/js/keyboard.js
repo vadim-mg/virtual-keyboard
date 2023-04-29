@@ -71,9 +71,9 @@ export class Keyboard {
             } else {
               clearInterval(repeater)
             }
-          }, 50)
+          }, 30)
         }
-      }, 300)
+      }, 200)
       event.preventDefault()
     }
   }
