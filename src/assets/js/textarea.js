@@ -41,7 +41,7 @@ export class Textarea {
         ? keyProps.withShiftKey
         : keyProps.key
 
-    let insertingText = !keyProps.system ? printedChar : ""
+    let insertingText
 
     console.log(`insertingText: ${insertingText}`)
 
@@ -69,34 +69,30 @@ export class Textarea {
         }
         break
       case "ArrowLeft":
-        insertingText = ""
         if (startPos > 0) {
           startPos--
-          endPos = startPos
+          if (!keyProps.shiftPressed) endPos = startPos
         }
         break
       case "ArrowRight":
-        insertingText = ""
         if (startPos < this._textField.value.length) {
           startPos++
-          endPos = startPos
+          if (!keyProps.shiftPressed) endPos = startPos
         }
         break
       case "ArrowUp":
-        insertingText = ""
         currentRow = Math.ceil(startPos / this._textField.cols)
         if (currentRow > 0) {
           startPos = startPos - this._textField.cols
           if (startPos < 0) startPos = 0
-          endPos = startPos
+          if (!keyProps.shiftPressed) endPos = startPos
         }
         break
       case "ArrowDown":
-        insertingText = ""
         currentRow = Math.ceil(startPos / this._textField.cols)
         if (currentRow < Math.ceil(this._textField.value.length / this._textField.cols)) {
           startPos = startPos + this._textField.cols
-          endPos = startPos
+          if (!keyProps.shiftPressed) endPos = startPos
         }
         break
       case "Enter":
@@ -108,15 +104,20 @@ export class Textarea {
       case "Shift":
         break
       default:
+        insertingText = !keyProps.system ? printedChar : ""
     }
 
-    this._textField.value =
-      this._textField.value.substring(0, startPos) +
-      insertingText +
-      this._textField.value.substring(endPos, this._textField.value.length)
-
-    this._textField.selectionStart = this._textField.selectionEnd =
-      startPos + insertingText.length
+    if (insertingText === undefined) {
+      this._textField.selectionStart = startPos
+      this._textField.selectionEnd = endPos
+    } else {
+      this._textField.value =
+        this._textField.value.substring(0, startPos) +
+        insertingText +
+        this._textField.value.substring(endPos, this._textField.value.length)
+      this._textField.selectionStart = this._textField.selectionEnd =
+        startPos + insertingText.length
+    }
 
     this._info.textContent += ` |||||   
       selectionStart: ${this._textField.selectionStart}
