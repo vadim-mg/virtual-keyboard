@@ -70,4 +70,18 @@ body {
   &_system {
     background: #6f6f6f;
   }
+  &_lighted {
+    position: relative;
+    &::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      border-radius: 50%;
+      background: #00adff;
+      box-shadow: 0 0 3px 2px gold;
+    }
+  }
 }

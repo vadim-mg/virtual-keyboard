@@ -6,7 +6,7 @@ export class Keyboard {
   _alternativeKeys
   _isEnLocale
   _pressedKeys
-  _capslockIsOn
+  _capsLockIsOn
   _textarea
 
   constructor(keys, alternativeKeys, textarea) {
@@ -16,7 +16,7 @@ export class Keyboard {
     this._alternativeKeys = alternativeKeys
     this._board = document.createElement("div")
     this._board.className = "keyboard"
-    this.capslockIsOn = false
+    this._capsLockIsOn = false
     this._textarea = textarea
 
     keys.forEach((row) => {
@@ -48,7 +48,7 @@ export class Keyboard {
 
   _handleMouseEvent = (event) => {
     const supportEventTypesUnpressed = ["mousedown"].includes(event.type)
-    const supportEventTypesPressed = ["mouseup"/* , "mouseout" */].includes(event.type)
+    const supportEventTypesPressed = ["mouseup" /* , "mouseout" */].includes(event.type)
     const unpressedKey = () => event.target.classList.contains("keyboard__key")
     const pressedKey = () => event.target.classList.contains("keyboard__key_pressed")
     if (
@@ -112,7 +112,6 @@ export class Keyboard {
       this._pressedKeys.has("ShiftLeft") ||
       this._pressedKeys.has("ShiftRight")
 
-
     if (pressedDown) {
       if (
         this._pressedKeys.has(code) &&
@@ -126,8 +125,8 @@ export class Keyboard {
           "MetaRight",
           "AltLeft",
           "AltRight",
-        ].includes(code)
-        && !(["ShiftLeft"].includes(code) && ["ShiftRight"].includes(code) )
+        ].includes(code) &&
+        !(["ShiftLeft"].includes(code) && ["ShiftRight"].includes(code))
       ) {
         return //don't need repeat this keys
       }
@@ -145,11 +144,9 @@ export class Keyboard {
 
       this._textarea.dispatchEvent(virtualKeydownEvent)
     } else {
-      if (
-        this._pressedKeys.has(code)
-      ) {
+      if (this._pressedKeys.has(code)) {
         eventTarget.classList.remove(pressedKeyClass)
-          this._pressedKeys.delete(code)
+        this._pressedKeys.delete(code)
       }
     }
 
@@ -157,6 +154,17 @@ export class Keyboard {
     if (keyProps.key === "Shift") {
       for (let key in this._alternativeKeys) {
         this._alternativeKeys[key].button.shift(pressedDown)
+      }
+    }
+
+    //change view all keys which depends of "shift"
+    if (keyProps.key === "CapsLock" && pressedDown) {
+      this._capsLockIsOn = !this._capsLockIsOn
+      eventTarget.classList[this._capsLockIsOn ? "add" : "remove"](
+        "keyboard__key_lighted"
+      )
+      for (let key in this._alternativeKeys) {
+        this._alternativeKeys[key].button.capsLock(this._capsLockIsOn)
       }
     }
 

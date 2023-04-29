@@ -4,11 +4,15 @@ export class Key {
   _enLocale
   _system
   _code
+  _isLetter
+  _isCapsLocked
 
   constructor(code, props) {
     this._props = props
     this._code = code
     this._enLocale = true
+    this._isLetter = /[a-z]/.test(props.key)
+    this._isCapsLocked = false
 
     this._button = document.createElement("li")
     this._button.className = "keyboard__key"
@@ -35,6 +39,18 @@ export class Key {
   shift = (pressed = true) => {
     if (this._props.withShiftKey) {
       this.render(pressed)
+    }
+  }
+
+  capsLock = (isOn = true) => {
+    if (this._isLetter) {
+      this._isCapsLocked = !this._isCapsLocked
+      const p = this._props
+      const ap = this._alternativeProps
+      //change letter
+      ;[p.key, p.withShiftKey] = [p.withShiftKey, p.key]
+      ;[ap.key, ap.withShiftKey] = [ap.withShiftKey, ap.key]
+      this.render()
     }
   }
 
