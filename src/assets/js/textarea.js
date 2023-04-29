@@ -76,8 +76,8 @@ export class Textarea {
         break
       case "ArrowRight":
         if (startPos < this._textField.value.length) {
-          startPos++
-          if (!keyProps.shiftPressed) endPos = startPos
+          endPos++
+          if (!keyProps.shiftPressed) startPos = endPos
         }
         break
       case "ArrowUp":
@@ -91,8 +91,8 @@ export class Textarea {
       case "ArrowDown":
         currentRow = Math.ceil(startPos / this._textField.cols)
         if (currentRow < Math.ceil(this._textField.value.length / this._textField.cols)) {
-          startPos = startPos + this._textField.cols
-          if (!keyProps.shiftPressed) endPos = startPos
+          endPos = startPos + this._textField.cols
+          if (!keyProps.shiftPressed) startPos = endPos
         }
         break
       case "Enter":
