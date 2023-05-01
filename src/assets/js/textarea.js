@@ -56,6 +56,22 @@ export class Textarea {
     let currentRow
 
     switch (keyProps.code) {
+      case "ShiftLeft":
+        console.log('ShiftLeft')
+        break
+      case "ShiftRight":
+        console.log('ShiftRight')
+        break
+      case "AltLeft":
+        console.log('AltLeft')
+        break
+      case "ShiftLeft":
+        console.log('ShiftLeft')
+        // if (startPos === endPos && startPos > 0) {
+        //   startPos--
+        // }
+        return
+        break
       case "Backspace":
         insertingText = ""
         if (startPos === endPos && startPos > 0) {
@@ -118,6 +134,7 @@ export class Textarea {
       this._textField.selectionStart = this._textField.selectionEnd =
         startPos + insertingText.length
     }
+    console.log('zasada')
 
     this._info.textContent += ` |||||   
       selectionStart: ${this._textField.selectionStart}
