@@ -8,7 +8,6 @@ export class Textarea {
   constructor(cols, rows, className) {
     this._wrapper = document.createElement('div');
     this._info = document.createElement('p');
-    this._info.textContent = 'info';
     this._wrapper.append(this._info);
 
     this._textField = document.createElement('textarea');
@@ -42,11 +41,6 @@ export class Textarea {
     this.focus();
     let startPos = this._textField.selectionStart;
     let endPos = this._textField.selectionEnd;
-    this._info.textContent = `
-      startPos: ${startPos}
-      endPos: ${endPos}
-      `;
-
     let currentRow;
 
     switch (keyProps.code) {
@@ -119,12 +113,5 @@ export class Textarea {
       this._textField.selectionStart = startPos + insertingText.length;
       this._textField.selectionEnd = startPos + insertingText.length;
     }
-
-    this._info.textContent += ` |||||   
-      selectionStart: ${this._textField.selectionStart}
-      selectionEnd: ${this._textField.selectionEnd}
-      cols: ${this._textField.cols}
-      rows: ${this._textField.rows}
-      `;
   };
 }
