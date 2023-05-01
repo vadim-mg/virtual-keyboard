@@ -9,9 +9,11 @@ import keysRu from './assets/keys-ru.json';
 const body = document.querySelector('body');
 
 body.append(caption);
+
 const textarea = new Textarea(100, 10, 'text-field');
 const ta = textarea.get();
 body.append(ta);
+
 const keyboard = new Keyboard(keys, keysRu, ta);
 body.append(keyboard.board());
 

@@ -15,7 +15,7 @@ export class Textarea {
     this._textField.cols = cols;
     this._textField.rows = rows;
     this._textField.autofocus = true;
-    this._textField.value = '0123456789012345678901234567890123456789012345678901234567890123456789';
+    this._textField.value = '';
 
     this._wrapper.append(this._textField);
 
@@ -39,10 +39,8 @@ export class Textarea {
     let insertingText;
 
     this.focus();
-    let startPos = this._textField.selectionStart;
-    let endPos = this._textField.selectionEnd;
-    let currentRow;
-
+    const startPos = this._textField.selectionStart;
+    const endPos = this._textField.selectionEnd;
     switch (keyProps.code) {
       case 'ShiftLeft':
         break;
@@ -52,47 +50,13 @@ export class Textarea {
         break;
       case 'AltRight':
         break;
-      case 'Backspace':
-        insertingText = '';
-        if (startPos === endPos && startPos > 0) {
-          startPos -= 1;
-        }
+      case 'ControlLeft':
         break;
-      case 'Delete':
-        insertingText = '';
-        if (startPos === endPos && startPos < this._textField.value.length) {
-          endPos += 1;
-        }
+      case 'ControlRight':
         break;
-      case 'ArrowLeft':
-        if (startPos > 0) {
-          startPos -= 1;
-          if (!keyProps.shiftPressed) endPos = startPos;
-        }
+      case 'MetaLeft':
         break;
-      case 'ArrowRight':
-        if (startPos < this._textField.value.length) {
-          endPos += 1;
-          if (!keyProps.shiftPressed) startPos = endPos;
-        }
-        break;
-      case 'ArrowUp':
-        currentRow = Math.ceil(startPos / this._textField.cols);
-        if (currentRow > 0) {
-          startPos -= this._textField.cols;
-          if (startPos < 0) startPos = 0;
-          if (!keyProps.shiftPressed) endPos = startPos;
-        }
-        break;
-      case 'ArrowDown':
-        currentRow = Math.ceil(startPos / this._textField.cols);
-        if (currentRow < Math.ceil(this._textField.value.length / this._textField.cols)) {
-          endPos = startPos + this._textField.cols;
-          if (!keyProps.shiftPressed) startPos = endPos;
-        }
-        break;
-      case 'Enter':
-        insertingText = '\n';
+      case 'MetaRight':
         break;
       case 'Tab':
         insertingText = '\t';

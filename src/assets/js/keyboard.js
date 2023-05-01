@@ -101,7 +101,7 @@ export class Keyboard {
         event.code,
         this._keys[event.code].getElement(),
       );
-      event.preventDefault();
+      // event.preventDefault();
     }
   };
 
@@ -113,6 +113,7 @@ export class Keyboard {
    * @param {*} eventTarget - dom element of keys for changing styles
    */
   _handleVirtualKeyboardEvent = (event, eventTypeDown, code, eventTarget) => {
+    console.log(this._pressedKeys);
     const pressedDown = event.type === eventTypeDown;
     const pressedKeyClass = 'keyboard__key_pressed';
     const keyProps = this._keys[code].getProperties(this._isEnLocale);
@@ -121,23 +122,57 @@ export class Keyboard {
       || this._pressedKeys.has('ShiftRight');
 
     if (pressedDown) {
-      if (
-        this._pressedKeys.has(code)
-        && [
-          'CapsLock',
-          'ShiftLeft',
-          'ShiftRight',
-          'ControlLeft',
-          'ControlRight',
-          'MetaLeft',
-          'MetaRight',
-          'AltLeft',
-          'AltRight',
-        ].includes(code)
-        && !(['ShiftLeft'].includes(code) && ['ShiftRight'].includes(code))
+      // if (
+      //   this._pressedKeys.has(code)
+      //   && [
+      //     'CapsLock',
+      //     'ShiftLeft',
+      //     'ShiftRight',
+      //     'ControlLeft',
+      //     'ControlRight',
+      //     'MetaLeft',
+      //     'MetaRight',
+      //     'AltLeft',
+      //     'AltRight',
+      //   ].includes(code)
+      //   && !(['ShiftLeft'].includes(code) && ['ShiftRight'].includes(code))
+      // ) {
+      //   return; // don't need repeat this keys
+      // }
+
+      // the Alt, Ctrl keys should work as on a real keyboard
+      if ((this._pressedKeys.has('ControlLeft') && !this._pressedKeys.has('AltLeft'))
+      || this._pressedKeys.has('ControlRight')
+      || (this._pressedKeys.has('AltLeft') && !this._pressedKeys.has('ControlLeft'))
+      || this._pressedKeys.has('AltRight')
+      || this._pressedKeys.has('MetalLeft')
+      || this._pressedKeys.has('MetaRight')
+      || this._pressedKeys.has('ShiftLeft')
+      || this._pressedKeys.has('ShiftRight')
+      || this._pressedKeys.has('CapsLock')
+      || code === 'ArrowLeft'
+      || code === 'ArrowRight'
+      || code === 'ArrowUp'
+      || code === 'ArrowDown'
+      || code === 'Backspace'
+      || code === 'Delete'
+      || code === 'Enter'
       ) {
-        return; // don't need repeat this keys
+        this._pressedKeys.add(code);
+        // change locale handler
+        if (this._pressedKeys.size === 2) {
+          if (this._pressedKeys.has('AltLeft') && this._pressedKeys.has('ControlLeft')) {
+            this._isEnLocale = !this._isEnLocale;
+            this._setLocale();
+            localStorage.setItem('locale', this._isEnLocale ? 'en' : ' ru');
+          } else {
+            return;
+          }
+        } else {
+          return;
+        }
       }
+      console.log('ggggggg');
 
       this._pressedKeys.add(code);
       eventTarget.classList.add(pressedKeyClass);
@@ -155,6 +190,7 @@ export class Keyboard {
       eventTarget.classList.remove(pressedKeyClass);
       this._pressedKeys.delete(code);
     }
+    event.preventDefault();
 
     // change view all keys which depends of "shift"
     if (keyProps.key === 'Shift') {
@@ -171,15 +207,6 @@ export class Keyboard {
       );
       for (const key in this._alternativeKeys) {
         this._alternativeKeys[key].button.capsLock(this._capsLockIsOn);
-      }
-    }
-
-    // change locale handler
-    if (this._pressedKeys.size === 2) {
-      if (this._pressedKeys.has('AltLeft') && this._pressedKeys.has('ControlLeft')) {
-        this._isEnLocale = !this._isEnLocale;
-        this._setLocale();
-        localStorage.setItem('locale', this._isEnLocale ? 'en' : ' ru');
       }
     }
   };
