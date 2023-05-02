@@ -1,0 +1,87 @@
+body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: center;
+}
+
+.caption {
+  font-size: 2rem;
+}
+
+.text-field {
+  margin-bottom: 2rem;
+  overflow: scroll;
+}
+
+.keyboard {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 2rem 1rem;
+  border: 2px solid #5c5c5c;
+  background: #5c5c5c;
+  border-radius: 10px;
+  box-shadow: 3px 3px 5px 6px gray;
+}
+
+.keyboard__row {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+}
+
+.keyboard__key {
+  user-select: none;
+  box-shadow: 0px 1px 3px 2px white;
+  background: gray;
+  color: white;
+  border-radius: 4px;
+  // padding: 1rem;
+  font-size: 1rem;
+  // min-width: 1rem;
+  text-align: center;
+  font-family: sans-serif;
+  transition: 0.1s;
+
+  display: flex;
+  box-sizing: border-box;
+  min-width: 3rem;
+  height: 3rem;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    color: rgb(207, 238, 31);
+  }
+  &_pressed {
+    opacity: 0.7;
+    background: gray;
+    box-shadow: 0px 1px 1px 1px;
+    color: rgb(109, 252, 73);
+    &:hover {
+      color: rgb(109, 252, 73);
+    }
+  }
+  &_system {
+    background: #6f6f6f;
+  }
+  &_lighted {
+    position: relative;
+    &::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      border-radius: 50%;
+      background: #00adff;
+      box-shadow: 0 0 3px 2px gold;
+    }
+  }
+}
